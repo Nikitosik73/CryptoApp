@@ -1,4 +1,4 @@
-package com.example.cryptoapp.pojo
+package com.example.cryptoapp.pojo.priceinfo
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

@@ -13,4 +13,6 @@ object ApiFactory {
         .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         .baseUrl(BASE_URl)
         .build()
+
+    val apiService = retrofit.create(ApiService::class.java)
 }
