@@ -55,7 +55,7 @@ dependencies {
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
-    // optional - ReactiveStreams support for LiveData
+    // optional - ReactiveStreams support for LiveDatagit remote add origin https://github.com/Nikitosik73/CryptoApp.git
     implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"
 
     def room_version = "2.5.1"
