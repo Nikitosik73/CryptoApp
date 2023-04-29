@@ -3,6 +3,7 @@ package com.example.cryptoapp.viewmodel
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import com.example.cryptoapp.api.ApiFactory
 import com.example.cryptoapp.database.AppDatabase
 import com.example.cryptoapp.pojo.priceinfo.CoinPriceInfo
@@ -11,6 +12,7 @@ import com.google.gson.Gson
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 
 class CoinViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -19,7 +21,22 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
 
     val priceList = database.coinPriceInfoDao().getPriceList()
 
-    fun loadData() {
+    fun getDetailInfo(fSym: String): LiveData<CoinPriceInfo> {
+        return database.coinPriceInfoDao().getPriceInfoAboutCoin(fSym)
+    }
+
+    /*
+        Создаём блок инициализации для того,
+        чтобы в момент создания viewmodel
+        данные подгружались автоматически
+        и не нужно было вызывать метод loadData()
+        в ручную
+     */
+    init {
+        loadData()
+    }
+
+    private fun loadData() {
         // заргужаем данные популярных валют
         val disposable = ApiFactory.apiService.getTopCoinsInfo(limit = 50)
             // превращаем данные о валютах одну строку
@@ -28,6 +45,9 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
             .flatMap { ApiFactory.apiService.getFullPriceList(fSyms = it) }
             // парсим наш gson и конвертируем его в CoinPriceInfo
             .map { getPriceListFromRawData(it) }
+            .delaySubscription(10, TimeUnit.SECONDS)
+            .repeat()
+            .retry()
             .subscribeOn(Schedulers.io())
             .subscribe({
                 Log.d("Test_of_load_data", "Success: $it")
