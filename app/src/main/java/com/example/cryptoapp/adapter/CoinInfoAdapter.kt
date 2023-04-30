@@ -14,13 +14,13 @@ import com.squareup.picasso.Picasso
 
 class CoinInfoAdapter(val context: Context) : Adapter<CoinInfoAdapter.CoinInfoViewHolder>() {
 
-    var coinInfoList: List<CoinPriceInfo> = arrayListOf()
+    var coinPriceList: List<CoinPriceInfo> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
-    var onCoinCLickListener: OnCoinCLickListener? = null
+    var onClickCoinListener: OnClickCoinListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinInfoViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
@@ -32,7 +32,7 @@ class CoinInfoAdapter(val context: Context) : Adapter<CoinInfoAdapter.CoinInfoVi
     }
 
     override fun onBindViewHolder(holder: CoinInfoViewHolder, position: Int) {
-        val coin = coinInfoList[position]
+        val coin = coinPriceList[position]
         with(holder) {
             with(coin) {
                 val symbolsTemplate = context.resources.getString(R.string.symbols_template)
@@ -42,16 +42,15 @@ class CoinInfoAdapter(val context: Context) : Adapter<CoinInfoAdapter.CoinInfoVi
                 textViewLastUpdate.text = String.format(lastUpdateTemplate, getFormattedTime())
                 Picasso.get().load(getFullImageURL()).into(imageViewLogoCoin)
                 itemView.setOnClickListener {
-                    onCoinCLickListener?.onCoinClick(this)
+                    onClickCoinListener?.onCoinClick(this)
                 }
             }
         }
-
     }
 
-    override fun getItemCount() = coinInfoList.size
+    override fun getItemCount() = coinPriceList.size
 
-    interface OnCoinCLickListener {
+    interface OnClickCoinListener {
         fun onCoinClick(coinPriceInfo: CoinPriceInfo)
     }
 
