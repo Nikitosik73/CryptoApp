@@ -20,7 +20,7 @@ class CoinInfoAdapter(val context: Context) : Adapter<CoinInfoAdapter.CoinInfoVi
             notifyDataSetChanged()
         }
 
-    var onClickCoinListener: OnClickCoinListener? = null
+    var onCoinCLickListener: ((CoinPriceInfo) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinInfoViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
@@ -42,17 +42,13 @@ class CoinInfoAdapter(val context: Context) : Adapter<CoinInfoAdapter.CoinInfoVi
                 textViewLastUpdate.text = String.format(lastUpdateTemplate, getFormattedTime())
                 Picasso.get().load(getFullImageURL()).into(imageViewLogoCoin)
                 itemView.setOnClickListener {
-                    onClickCoinListener?.onCoinClick(this)
+                    onCoinCLickListener?.invoke(this)
                 }
             }
         }
     }
 
     override fun getItemCount() = coinPriceList.size
-
-    interface OnClickCoinListener {
-        fun onCoinClick(coinPriceInfo: CoinPriceInfo)
-    }
 
     inner class CoinInfoViewHolder(itemView: View) : ViewHolder(itemView) {
         val imageViewLogoCoin = itemView.findViewById<ImageView>(R.id.imageViewLogoCoin)
