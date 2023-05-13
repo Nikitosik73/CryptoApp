@@ -10,6 +10,8 @@
     <string name="last_updated_label">Обновлено:</string>
     <string name="detail_info">Detail Information</string>
     <string name="name_news">Название новости</string>
-    <string name="title_news">Описание: %s</string>
+    <string name="title_news">Заголовок: %s</string>
     <string name="news_crypto">Новости криптовалют</string>
+    <string name="body_news">Описание: \n%s</string>
+    <string name="step_to_page_news">Открыть статью</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.example.cryptoapp.pojo.news
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Data(
     @SerializedName("id")
@@ -15,4 +16,4 @@ data class Data(
     val body: String?,
     @SerializedName("source_info")
     val sourceInfo: SourceInfo?
-)
+) : Serializable
