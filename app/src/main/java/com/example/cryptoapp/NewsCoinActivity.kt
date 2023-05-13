@@ -34,6 +34,14 @@ class NewsCoinActivity : AppCompatActivity() {
         viewModel.newsList.observe(this) {
             newsAdapter.submitList(it)
         }
+
+        newsAdapter.onCLickNewsListener = {
+            val intent = DetailNewsActivity.newIntent(
+                this@NewsCoinActivity,
+                it
+            )
+            startActivity(intent)
+        }
     }
 
     companion object {
