@@ -37,5 +37,10 @@ class CoinPriceListActivity : AppCompatActivity() {
             Log.d("Test_of_load_data", it.toString())
             coinAdapter.coinPriceList = it
         })
+
+        binding.buttonTest.setOnClickListener {
+            val intent = NewsCoinActivity.newIntent(this@CoinPriceListActivity)
+            startActivity(intent)
+        }
     }
 }
