@@ -11,4 +11,5 @@
     <string name="detail_info">Detail Information</string>
     <string name="name_news">Название новости</string>
     <string name="title_news">Описание: %s</string>
+    <string name="news_crypto">Новости криптовалют</string>
 </resources>
