@@ -9,4 +9,6 @@
     <string name="last_market_label">Последняя сделка:</string>
     <string name="last_updated_label">Обновлено:</string>
     <string name="detail_info">Detail Information</string>
+    <string name="name_news">Название новости</string>
+    <string name="title_news">Описание: %s</string>
 </resources>
