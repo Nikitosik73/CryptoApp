@@ -170,7 +170,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/inter_bold"
-                android:textColor="#FF5A25"
+                android:textColor="#01DA0A"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/tvMaxPriceLabel"
                 app:layout_constraintTop_toBottomOf="@id/tvMinPriceLabel"
