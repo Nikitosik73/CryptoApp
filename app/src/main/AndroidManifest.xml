@@ -14,16 +14,16 @@
         android:theme="@style/Theme.CryptoApp"
         tools:targetApi="31">
         <activity
-            android:name=".view.DetailNewsActivity"
+            android:name=".presentation.view.DetailNewsActivity"
             android:exported="false" />
         <activity
-            android:name=".view.NewsCoinActivity"
+            android:name=".presentation.view.NewsCoinActivity"
             android:exported="false" />
         <activity
-            android:name=".view.CoinDetailActivity"
+            android:name=".presentation.view.CoinDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".view.CoinPriceListActivity"
+            android:name=".presentation.view.CoinPriceListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
