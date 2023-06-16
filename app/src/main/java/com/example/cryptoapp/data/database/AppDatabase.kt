@@ -4,12 +4,12 @@ import android.app.Application
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.cryptoapp.data.model.priceinfo.CoinPriceInfo
+import com.example.cryptoapp.data.database.model.CoinInfoDbModel
 
-@Database(entities = [CoinPriceInfo::class], version = 1, exportSchema = false)
+@Database(entities = [CoinInfoDbModel::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun coinPriceInfoDao(): CoinPriceInfoDao
+    abstract fun coinInfoDao(): CoinInfoDao
 
     companion object {
         private const val NAME_DB = "main.db"

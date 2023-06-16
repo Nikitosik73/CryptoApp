@@ -6,8 +6,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.example.cryptoapp.data.network.ApiFactory
 import com.example.cryptoapp.data.database.AppDatabase
-import com.example.cryptoapp.data.model.priceinfo.CoinPriceInfo
-import com.example.cryptoapp.data.model.priceinfo.CoinPriceInfoRawData
+import com.example.cryptoapp.data.network.model.coininfo.CoinInfoDto
+import com.example.cryptoapp.data.network.model.coininfo.CoinInfoJsonContainerDto
 import com.google.gson.Gson
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -20,7 +20,7 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
 
     val priceList = database.coinPriceInfoDao().getPriceList()
 
-    fun getDetailInfo(fSym: String): LiveData<CoinPriceInfo> {
+    fun getDetailInfo(fSym: String): LiveData<CoinInfoDto> {
         return database.coinPriceInfoDao().getPriceInfoAboutCoin(fSym)
     }
 
@@ -39,7 +39,7 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
         // заргужаем данные популярных валют
         val disposable = ApiFactory.apiService.getTopCoinsInfo(limit = 50)
             // превращаем данные о валютах одну строку
-            .map { it.data?.map { it.coinInfo?.name }?.joinToString(",")?: "" }
+            .map { it.names?.map { it.coinName?.name }?.joinToString(",")?: "" }
             // выводим полную ифнформация о популярных валютах запустив метод getFullPriceList
             .flatMap { ApiFactory.apiService.getFullPriceList(fSyms = it) }
             // парсим наш gson и конвертируем его в CoinPriceInfo
@@ -58,10 +58,10 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun getPriceListFromRawData(
-        coinPriceInfoRawData: CoinPriceInfoRawData
-    ): List<CoinPriceInfo> {
-        val result = ArrayList<CoinPriceInfo>()
-        val jsonObject = coinPriceInfoRawData.coinPriceJsonObject?: return result
+        jsonContainerDto: CoinInfoJsonContainerDto
+    ): List<CoinInfoDto> {
+        val result = ArrayList<CoinInfoDto>()
+        val jsonObject = jsonContainerDto.coinPriceJsonObject?: return result
         // выбираем все ключи в нашем gson
         val coinKeySet = jsonObject.keySet()
         // проходимся по всем ключам
@@ -75,7 +75,7 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
                 // Конвертируем в CoinPriceInfo
                 val priceInfo = Gson().fromJson(
                     currencyJson.getAsJsonObject(currencyKey),
-                    CoinPriceInfo::class.java
+                    CoinInfoDto::class.java
                 )
                 result.add(priceInfo)
             }

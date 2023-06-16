@@ -1,7 +1,7 @@
 package com.example.cryptoapp.presentation.adapter.callback
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.cryptoapp.data.model.news.Data
+import com.example.cryptoapp.data.network.model.news.Data
 
 class NewsDiffCallBack : DiffUtil.ItemCallback<Data>() {
 
