@@ -1,11 +1,11 @@
-package com.example.cryptoapp
+package com.example.cryptoapp.view
 
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.cryptoapp.adapter.CoinInfoAdapter
+import com.example.cryptoapp.adapter.CoinPriceAdapter
 import com.example.cryptoapp.databinding.ActivityCoinPriceListBinding
 import com.example.cryptoapp.viewmodel.CoinViewModel
 
@@ -13,7 +13,7 @@ class CoinPriceListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCoinPriceListBinding
     private lateinit var viewModel: CoinViewModel
-    private lateinit var coinAdapter: CoinInfoAdapter
+    private lateinit var priceAdapter: CoinPriceAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,26 +21,31 @@ class CoinPriceListActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        coinAdapter = CoinInfoAdapter(this)
-        coinAdapter.onCoinCLickListener = {
+        initAdapter()
+
+        priceAdapter.onClickCoinPriceInfo = {
             val intent = CoinDetailActivity.newIntent(
                 this@CoinPriceListActivity,
                 it.fromSymbol
             )
             startActivity(intent)
         }
-        binding.recyclerViewCoinInfo.adapter = coinAdapter
 
         viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
 
         viewModel.priceList.observe(this, Observer {
             Log.d("Test_of_load_data", it.toString())
-            coinAdapter.coinPriceList = it
+            priceAdapter.submitList(it)
         })
 
         binding.buttonTest.setOnClickListener {
             val intent = NewsCoinActivity.newIntent(this@CoinPriceListActivity)
             startActivity(intent)
         }
+    }
+
+    private fun initAdapter() {
+        priceAdapter = CoinPriceAdapter(this)
+        binding.recyclerViewCoinInfo.adapter = priceAdapter
     }
 }
