@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.example.cryptoapp.R
 import com.example.cryptoapp.presentation.adapter.callback.NewsDiffCallBack
 import com.example.cryptoapp.presentation.adapter.holder.NewsViewHolder
-import com.example.cryptoapp.data.model.news.Data
+import com.example.cryptoapp.data.network.model.news.Data
 import com.example.cryptoapp.databinding.ItemNewsBinding
 import com.squareup.picasso.Picasso
 

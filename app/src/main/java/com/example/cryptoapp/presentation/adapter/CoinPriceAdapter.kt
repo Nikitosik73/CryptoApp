@@ -8,16 +8,16 @@ import com.example.cryptoapp.R
 import com.example.cryptoapp.presentation.adapter.callback.CoinPriceDiffUtil
 import com.example.cryptoapp.presentation.adapter.holder.CoinInfoViewHolder
 import com.example.cryptoapp.databinding.ItemCoinInfoBinding
-import com.example.cryptoapp.data.model.priceinfo.CoinPriceInfo
+import com.example.cryptoapp.data.network.model.coininfo.CoinInfoDto
 import com.squareup.picasso.Picasso
 
 class CoinPriceAdapter(
     val context: Context
-) : ListAdapter<CoinPriceInfo, CoinInfoViewHolder>(
+) : ListAdapter<CoinInfoDto, CoinInfoViewHolder>(
     CoinPriceDiffUtil()
 ) {
 
-    var onClickCoinPriceInfo: ((CoinPriceInfo) -> Unit)? = null
+    var onClickCoinPriceInfo: ((CoinInfoDto) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinInfoViewHolder {
         ItemCoinInfoBinding.inflate(

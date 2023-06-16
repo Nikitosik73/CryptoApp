@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import com.example.cryptoapp.R
 import com.example.cryptoapp.databinding.ActivityDetailNewsBinding
-import com.example.cryptoapp.data.model.news.Data
+import com.example.cryptoapp.data.network.model.news.Data
 import com.squareup.picasso.Picasso
 
 class DetailNewsActivity : AppCompatActivity() {
