@@ -1,4 +1,4 @@
-package com.example.cryptoapp
+package com.example.cryptoapp.view
 
 import android.content.Context
 import android.content.Intent
@@ -6,10 +6,9 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.lifecycle.ViewModelProvider
+import com.example.cryptoapp.R
 import com.example.cryptoapp.databinding.ActivityDetailNewsBinding
 import com.example.cryptoapp.pojo.news.Data
-import com.example.cryptoapp.viewmodel.NewsViewModel
 import com.squareup.picasso.Picasso
 
 class DetailNewsActivity : AppCompatActivity() {
