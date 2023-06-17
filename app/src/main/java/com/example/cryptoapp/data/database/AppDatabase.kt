@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.cryptoapp.data.database.model.CoinInfoDbModel
 
-@Database(entities = [CoinInfoDbModel::class], version = 1, exportSchema = false)
+@Database(entities = [CoinInfoDbModel::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun coinInfoDao(): CoinInfoDao
@@ -23,7 +23,7 @@ abstract class AppDatabase : RoomDatabase() {
                     application,
                     AppDatabase::class.java,
                     NAME_DB
-                ).build()
+                ).fallbackToDestructiveMigration().build()
                 instance = db
                 return db
             }
