@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.cryptoapp.R
 import com.example.cryptoapp.presentation.adapter.CoinPriceAdapter
 import com.example.cryptoapp.databinding.ActivityCoinPriceListBinding
 import com.example.cryptoapp.presentation.viewmodel.CoinViewModel
@@ -24,11 +25,11 @@ class CoinPriceListActivity : AppCompatActivity() {
         initAdapter()
 
         priceAdapter.onClickCoinPriceInfo = {
-            val intent = CoinDetailActivity.newIntent(
-                this@CoinPriceListActivity,
-                it.fromSymbol
-            )
-            startActivity(intent)
+            if (isOnePaneToMode()) {
+                launchScreenActivity(it.fromSymbol)
+            } else {
+                launchScreenFragment(it.fromSymbol)
+            }
         }
 
         viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
@@ -43,6 +44,22 @@ class CoinPriceListActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+    private fun launchScreenFragment(fromSymbol: String) {
+        supportFragmentManager.popBackStack()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, CoinDetailFragment.newInstance(fromSymbol))
+            .addToBackStack(null)
+            .commit()
+    }
+
+    private fun launchScreenActivity(fromSymbol: String) {
+        CoinDetailActivity.newIntent(this, fromSymbol).apply {
+            startActivity(this)
+        }
+    }
+
+    private fun isOnePaneToMode() = binding.fragmentContainer == null
 
     private fun initAdapter() {
         priceAdapter = CoinPriceAdapter(this)
