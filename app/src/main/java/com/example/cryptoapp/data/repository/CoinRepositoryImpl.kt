@@ -4,9 +4,12 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.switchMap
+import androidx.work.ExistingWorkPolicy
+import androidx.work.WorkManager
 import com.example.cryptoapp.data.database.AppDatabase
 import com.example.cryptoapp.data.mapper.CoinMapper
 import com.example.cryptoapp.data.network.ApiFactory
+import com.example.cryptoapp.data.workers.RefreshDataWorker
 import com.example.cryptoapp.domain.entity.CoinInfo
 import com.example.cryptoapp.domain.repository.CoinRepository
 import kotlinx.coroutines.delay
@@ -16,7 +19,6 @@ class CoinRepositoryImpl(
 ) : CoinRepository {
 
     private val coinDao = AppDatabase.getInstance(application).coinInfoDao()
-    private val apiService = ApiFactory.apiService
     private val mapper = CoinMapper()
 
     override fun getCoinInfoList(): LiveData<List<CoinInfo>> {
@@ -39,24 +41,12 @@ class CoinRepositoryImpl(
         }
     }
 
-    override suspend fun loadData() {
-        while (true) {
-            try {// получаем список популярных валют
-                val topCoinsNames = apiService.getTopCoinsInfo(limit = 50)
-                // преобразуем их в строку
-                val fromSymbols = mapper.mapNamesListToString(topCoinsNames)
-                // получим информацию об этих валютах
-                val jsonContainer = apiService.getFullPriceList(fSyms = fromSymbols)
-                // преобразуем json в dto
-                val listDto = mapper.mapJsonContainerToDto(jsonContainer)
-                // преобразуем dto в dbModel
-                val listDbModel = listDto.map { dto ->
-                    mapper.mapDtoToDbModel(dto)
-                }
-                coinDao.insertPriceList(listDbModel)
-            } catch (e: Exception) {
-            }
-            delay(10000)
-        }
+    override fun loadData() {
+        val workManager = WorkManager.getInstance(application)
+        workManager.enqueueUniqueWork(
+            RefreshDataWorker.NAME,
+            ExistingWorkPolicy.REPLACE,
+            RefreshDataWorker.makeRequest()
+        )
     }
 }
