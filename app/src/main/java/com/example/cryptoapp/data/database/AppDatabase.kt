@@ -1,6 +1,7 @@
 package com.example.cryptoapp.data.database
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -16,11 +17,11 @@ abstract class AppDatabase : RoomDatabase() {
         private var instance: AppDatabase? = null
         private val LOCK = Any()
 
-        fun getInstance(application: Application): AppDatabase {
+        fun getInstance(context: Context): AppDatabase {
             synchronized(LOCK) {
                 instance?.let { return it }
                 val db = Room.databaseBuilder(
-                    application,
+                    context,
                     AppDatabase::class.java,
                     NAME_DB
                 ).fallbackToDestructiveMigration().build()

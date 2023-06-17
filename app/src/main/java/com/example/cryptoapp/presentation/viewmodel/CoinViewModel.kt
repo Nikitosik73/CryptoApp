@@ -31,8 +31,6 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
         в ручную
      */
     init {
-        viewModelScope.launch {
-            loadDataUseCase()
-        }
+        loadDataUseCase()
     }
 }
