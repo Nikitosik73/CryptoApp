@@ -5,12 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.cryptoapp.R
-import com.example.cryptoapp.data.network.ApiFactory.BASE_IMAGE_URl
 import com.example.cryptoapp.presentation.adapter.callback.CoinPriceDiffUtil
 import com.example.cryptoapp.presentation.adapter.holder.CoinInfoViewHolder
 import com.example.cryptoapp.databinding.ItemCoinInfoBinding
 import com.example.cryptoapp.domain.entity.CoinInfo
-import com.example.cryptoapp.utils.convertTimestampToTime
 import com.squareup.picasso.Picasso
 
 class CoinPriceAdapter(
@@ -37,8 +35,8 @@ class CoinPriceAdapter(
                 val templateTime = context.resources.getString(R.string.last_update_template)
                 textViewCoinName.text = String.format(templateCoinName, fromSymbol, toSymbol)
                 textViewPriceInfo.text = price
-                textViewLastUpdate.text = String.format(templateTime, convertTimestampToTime(lastUpdate))
-                Picasso.get().load(BASE_IMAGE_URl + imageUrl).into(imageViewLogoCoin)
+                textViewLastUpdate.text = String.format(templateTime, lastUpdate)
+                Picasso.get().load(imageUrl).into(imageViewLogoCoin)
                 binding.root.setOnClickListener {
                     onClickCoinPriceInfo?.invoke(this)
                 }
