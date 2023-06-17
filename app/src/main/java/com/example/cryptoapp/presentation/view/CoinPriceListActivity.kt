@@ -33,10 +33,10 @@ class CoinPriceListActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
 
-        viewModel.priceList.observe(this, Observer {
+        viewModel.coinInfoList.observe(this) {
             Log.d("Test_of_load_data", it.toString())
             priceAdapter.submitList(it)
-        })
+        }
 
         binding.buttonTest.setOnClickListener {
             val intent = NewsCoinActivity.newIntent(this@CoinPriceListActivity)

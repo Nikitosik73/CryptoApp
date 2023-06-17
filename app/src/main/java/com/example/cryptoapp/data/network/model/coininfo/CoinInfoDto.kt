@@ -7,7 +7,6 @@ import com.example.cryptoapp.utils.convertTimestampToTime
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "full_price_list")
 data class CoinInfoDto(
     @SerializedName("TYPE")
     @Expose

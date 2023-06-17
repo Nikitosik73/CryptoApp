@@ -23,9 +23,9 @@ class NewsCoinActivity : AppCompatActivity() {
         initAdapter()
         viewModel = ViewModelProvider(this)[NewsViewModel::class.java]
 
-        viewModel.newsList.observe(this) {
-            newsAdapter.submitList(it)
-        }
+//        viewModel.newsList.observe(this) {
+//            newsAdapter.submitList(it)
+//        }
 
         newsAdapter.onCLickNewsListener = {
             val intent = DetailNewsActivity.newIntent(

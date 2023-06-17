@@ -41,19 +41,21 @@ class CoinRepositoryImpl(
 
     override suspend fun loadData() {
         while (true) {
-            // получаем список популярных валют
-            val topCoinsNames = apiService.getTopCoinsInfo()
-            // преобразуем их в строку
-            val fromSymbols = mapper.mapNamesListToString(topCoinsNames)
-            // получим информацию об этих валютах
-            val jsonContainer = apiService.getFullPriceList(fSyms = fromSymbols)
-            // преобразуем json в dto
-            val listDto = mapper.mapJsonContainerToDto(jsonContainer)
-            // преобразуем dto в dbModel
-            val listDbModel = listDto.map { dto ->
-                mapper.mapDtoToDbModel(dto)
+            try {// получаем список популярных валют
+                val topCoinsNames = apiService.getTopCoinsInfo(limit = 50)
+                // преобразуем их в строку
+                val fromSymbols = mapper.mapNamesListToString(topCoinsNames)
+                // получим информацию об этих валютах
+                val jsonContainer = apiService.getFullPriceList(fSyms = fromSymbols)
+                // преобразуем json в dto
+                val listDto = mapper.mapJsonContainerToDto(jsonContainer)
+                // преобразуем dto в dbModel
+                val listDbModel = listDto.map { dto ->
+                    mapper.mapDtoToDbModel(dto)
+                }
+                coinDao.insertPriceList(listDbModel)
+            } catch (e: Exception) {
             }
-            coinDao.insertPriceList(listDbModel)
             delay(10000)
         }
     }

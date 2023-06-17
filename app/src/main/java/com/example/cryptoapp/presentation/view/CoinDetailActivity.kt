@@ -7,8 +7,10 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.cryptoapp.data.network.ApiFactory.BASE_IMAGE_URl
 import com.example.cryptoapp.databinding.ActivityCoinDetailBinding
 import com.example.cryptoapp.presentation.viewmodel.CoinViewModel
+import com.example.cryptoapp.utils.convertTimestampToTime
 import com.squareup.picasso.Picasso
 
 class CoinDetailActivity : AppCompatActivity() {
@@ -28,19 +30,19 @@ class CoinDetailActivity : AppCompatActivity() {
         }
         val fromSymbol = intent.getStringExtra(EXTRA_FROM_SYMBOL)
         viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
-        viewModel.getDetailInfo(fromSymbol?: "").observe(this, Observer {
+        viewModel.getDetailInfo(fromSymbol?: "").observe(this) {
             Log.d("Detail_Info", it.toString())
             with(binding) {
                 tvPrice.text = it.price
                 tvMinPrice.text = it.lowDay
                 tvMaxPrice.text = it.highDay
                 tvLastMarket.text = it.lastMarket
-                tvUpdate.text = it.getFormattedTime()
+                tvUpdate.text = convertTimestampToTime(it.lastUpdate)
                 tvCoin.text = it.fromSymbol
                 tvToSymbol.text = it.toSymbol
-                Picasso.get().load(it.getFullImageURL()).into(ivCoinLogo)
+                Picasso.get().load(BASE_IMAGE_URl + it.imageUrl).into(ivCoinLogo)
             }
-        })
+        }
     }
 
     companion object {
