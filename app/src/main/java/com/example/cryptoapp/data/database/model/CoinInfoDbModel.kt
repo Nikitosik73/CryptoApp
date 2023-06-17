@@ -1,7 +1,8 @@
 package com.example.cryptoapp.data.database.model
 
+import androidx.room.Entity
 import androidx.room.PrimaryKey
-
+@Entity(tableName = "full_price_list")
 data class CoinInfoDbModel(
     @PrimaryKey
     val fromSymbol: String,
