@@ -1,7 +1,7 @@
 package com.example.cryptoapp.domain.repository
 
 import androidx.lifecycle.LiveData
-import com.example.cryptoapp.domain.entity.CoinInfo
+import com.example.cryptoapp.domain.entity.coin.CoinInfo
 
 interface CoinRepository {
 

@@ -8,7 +8,8 @@ import android.os.Bundle
 import android.util.Log
 import com.example.cryptoapp.R
 import com.example.cryptoapp.databinding.ActivityDetailNewsBinding
-import com.example.cryptoapp.data.network.model.news.Data
+import com.example.cryptoapp.data.network.model.news.NewsInfoDto
+import com.example.cryptoapp.domain.entity.news.NewsInfo
 import com.squareup.picasso.Picasso
 
 class DetailNewsActivity : AppCompatActivity() {
@@ -25,7 +26,7 @@ class DetailNewsActivity : AppCompatActivity() {
             return
         }
 
-        val news = (intent.getSerializableExtra(NEWS)) as Data
+        val news = intent.getSerializableExtra(NEWS) as NewsInfo
         Log.d("test_id", "News: $news")
 
         with(binding) {
@@ -33,7 +34,7 @@ class DetailNewsActivity : AppCompatActivity() {
                 val templateString = resources.getString(R.string.title_news)
                 val templateBodyString = resources.getString(R.string.body_news)
                 Picasso.get().load(imageUrl).into(imageViewNews)
-                textViewNameNews.text = sourceInfo?.name
+                textViewNameNews.text = id.toString()
                 textViewTitle.text = String.format(templateString, title)
                 textViewBody.text = String.format(templateBodyString, body)
                 buttonNewsPage.setOnClickListener {
@@ -51,7 +52,7 @@ class DetailNewsActivity : AppCompatActivity() {
 
         private const val NEWS = "news"
 
-        fun newIntent(context: Context, news: Data): Intent {
+        fun newIntent(context: Context, news: NewsInfo): Intent {
             return Intent(context, DetailNewsActivity::class.java).apply {
                 putExtra(NEWS, news)
             }

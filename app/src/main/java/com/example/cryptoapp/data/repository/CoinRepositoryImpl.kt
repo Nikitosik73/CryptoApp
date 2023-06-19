@@ -8,11 +8,9 @@ import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkManager
 import com.example.cryptoapp.data.database.AppDatabase
 import com.example.cryptoapp.data.mapper.CoinMapper
-import com.example.cryptoapp.data.network.ApiFactory
 import com.example.cryptoapp.data.workers.RefreshDataWorker
-import com.example.cryptoapp.domain.entity.CoinInfo
+import com.example.cryptoapp.domain.entity.coin.CoinInfo
 import com.example.cryptoapp.domain.repository.CoinRepository
-import kotlinx.coroutines.delay
 
 class CoinRepositoryImpl(
     private val application: Application

@@ -1,7 +1,7 @@
 package com.example.cryptoapp.data.network
 
 import com.example.cryptoapp.data.network.model.coinname.CoinNamesListDto
-import com.example.cryptoapp.data.network.model.news.NewsResponse
+import com.example.cryptoapp.data.network.model.news.NewsContainerDto
 import com.example.cryptoapp.data.network.model.coininfo.CoinInfoJsonContainerDto
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -23,10 +23,10 @@ interface ApiService {
     ): CoinInfoJsonContainerDto
 
     @GET("v2/news/")
-    fun getNewsCoin(
+    suspend fun getNewsCoin(
         @Query(QUERY_PARAM_API_KEY) apiKey: String = "7180c5be373263271be28be7dffa06f6d9b3e8f5129d7904cc93f5b1c423a9ea",
         @Query(LANGUAGE) language: String = LANGUAGE
-    ): NewsResponse
+    ): NewsContainerDto
 
     companion object {
         private const val QUERY_PARAM_LIMIT = "limit"

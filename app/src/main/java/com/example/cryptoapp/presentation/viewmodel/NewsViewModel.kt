@@ -1,35 +1,29 @@
 package com.example.cryptoapp.presentation.viewmodel
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.cryptoapp.data.repository.NewsRepositoryImpl
+import com.example.cryptoapp.domain.usecase.GetNewsUseCase
+import com.example.cryptoapp.domain.usecase.LoadNewsUseCase
+import kotlinx.coroutines.launch
 
-class NewsViewModel : ViewModel() {
+class NewsViewModel(application: Application) : AndroidViewModel(application) {
 
-//    private val compositeDisposable = CompositeDisposable()
-//
-//    private var _newsList = MutableLiveData<List<Data>>()
-//    val newsList: LiveData<List<Data>>
-//        get() = _newsList
-//
-//    init {
-//        loadNews()
-//    }
-//
-//    private fun loadNews() {
-//        val disposable = ApiFactory.apiService.getNewsCoin()
-//            .map { it.data?: throw RuntimeException("Empty List") }
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe({
-//                Log.d("NewsViewModel", "Success: $it")
-//                _newsList.value = it
-//            }, {
-//                Log.d("NewsViewModel", "Failure: ${it.message}")
-//            })
-//        compositeDisposable.add(disposable)
-//    }
-//
-//    override fun onCleared() {
-//        super.onCleared()
-//        compositeDisposable.dispose()
-//    }
+    private val repository = NewsRepositoryImpl(application)
+
+    private val getNewsUseCase = GetNewsUseCase(repository)
+    private val loadNewsUseCase = LoadNewsUseCase(repository)
+
+    val newsList = getNewsUseCase()
+
+    init {
+        loadNews()
+    }
+
+    private fun loadNews() {
+        viewModelScope.launch {
+            loadNewsUseCase()
+        }
+    }
 }
