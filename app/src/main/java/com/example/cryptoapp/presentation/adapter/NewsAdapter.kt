@@ -7,14 +7,15 @@ import androidx.recyclerview.widget.ListAdapter
 import com.example.cryptoapp.R
 import com.example.cryptoapp.presentation.adapter.callback.NewsDiffCallBack
 import com.example.cryptoapp.presentation.adapter.holder.NewsViewHolder
-import com.example.cryptoapp.data.network.model.news.Data
+import com.example.cryptoapp.data.network.model.news.NewsInfoDto
 import com.example.cryptoapp.databinding.ItemNewsBinding
+import com.example.cryptoapp.domain.entity.news.NewsInfo
 import com.squareup.picasso.Picasso
 
-class NewsAdapter(val context: Context) : ListAdapter<Data, NewsViewHolder>(
+class NewsAdapter(val context: Context) : ListAdapter<NewsInfo, NewsViewHolder>(
     NewsDiffCallBack()
 ) {
-    var onCLickNewsListener: ((Data) -> Unit)? = null
+    var onCLickNewsListener: ((NewsInfo) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         ItemNewsBinding.inflate(
@@ -29,8 +30,8 @@ class NewsAdapter(val context: Context) : ListAdapter<Data, NewsViewHolder>(
         with(binding) {
             with(newsItem) {
                 val templateTitleNews = context.resources.getString(R.string.title_news)
-                nameNews.text = sourceInfo?.name
-                titleNews.text = String.format(templateTitleNews, title)
+                tvNameNews.text = id.toString()
+                tvTitleNews.text = String.format(templateTitleNews, title)
                 Picasso.get().load(imageUrl).into(imageNews)
                 root.setOnClickListener {
                     onCLickNewsListener?.invoke(this)

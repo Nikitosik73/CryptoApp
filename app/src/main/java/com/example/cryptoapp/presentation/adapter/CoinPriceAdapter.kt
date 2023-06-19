@@ -8,7 +8,7 @@ import com.example.cryptoapp.R
 import com.example.cryptoapp.presentation.adapter.callback.CoinPriceDiffUtil
 import com.example.cryptoapp.presentation.adapter.holder.CoinInfoViewHolder
 import com.example.cryptoapp.databinding.ItemCoinInfoBinding
-import com.example.cryptoapp.domain.entity.CoinInfo
+import com.example.cryptoapp.domain.entity.coin.CoinInfo
 import com.squareup.picasso.Picasso
 
 class CoinPriceAdapter(

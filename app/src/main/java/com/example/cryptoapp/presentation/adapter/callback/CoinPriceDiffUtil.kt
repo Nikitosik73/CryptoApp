@@ -1,7 +1,7 @@
 package com.example.cryptoapp.presentation.adapter.callback
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.cryptoapp.domain.entity.CoinInfo
+import com.example.cryptoapp.domain.entity.coin.CoinInfo
 
 class CoinPriceDiffUtil : DiffUtil.ItemCallback<CoinInfo>(){
 

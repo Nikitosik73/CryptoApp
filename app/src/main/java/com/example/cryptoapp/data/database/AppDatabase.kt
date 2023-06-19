@@ -1,16 +1,17 @@
 package com.example.cryptoapp.data.database
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.cryptoapp.data.database.model.CoinInfoDbModel
+import com.example.cryptoapp.data.database.model.NewsInfoDbModel
 
-@Database(entities = [CoinInfoDbModel::class], version = 2, exportSchema = false)
+@Database(entities = [CoinInfoDbModel::class, NewsInfoDbModel::class], version = 3, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun coinInfoDao(): CoinInfoDao
+    abstract fun newsInfoDao(): NewsInfoDao
 
     companion object {
         private const val NAME_DB = "main.db"
