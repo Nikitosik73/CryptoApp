@@ -3,12 +3,11 @@ package com.example.cryptoapp.presentation.view
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.example.cryptoapp.R
 import com.example.cryptoapp.databinding.ActivityDetailNewsBinding
-import com.example.cryptoapp.data.network.model.news.NewsInfoDto
 import com.example.cryptoapp.domain.entity.news.NewsInfo
 import com.squareup.picasso.Picasso
 

@@ -2,13 +2,12 @@ package com.example.cryptoapp.presentation.view
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.example.cryptoapp.presentation.adapter.NewsAdapter
 import com.example.cryptoapp.databinding.ActivityNewsCoinBinding
+import com.example.cryptoapp.presentation.adapter.NewsAdapter
 import com.example.cryptoapp.presentation.app.CoinApp
-import com.example.cryptoapp.presentation.viewmodel.CoinViewModel
 import com.example.cryptoapp.presentation.viewmodel.NewsViewModel
 import com.example.cryptoapp.presentation.viewmodelfactory.ViewModelFactory
 import javax.inject.Inject

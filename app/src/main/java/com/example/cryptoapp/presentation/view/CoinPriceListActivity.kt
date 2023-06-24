@@ -3,11 +3,10 @@ package com.example.cryptoapp.presentation.view
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.cryptoapp.R
-import com.example.cryptoapp.presentation.adapter.CoinPriceAdapter
 import com.example.cryptoapp.databinding.ActivityCoinPriceListBinding
+import com.example.cryptoapp.presentation.adapter.CoinPriceAdapter
 import com.example.cryptoapp.presentation.app.CoinApp
 import com.example.cryptoapp.presentation.viewmodel.CoinViewModel
 import com.example.cryptoapp.presentation.viewmodelfactory.ViewModelFactory
