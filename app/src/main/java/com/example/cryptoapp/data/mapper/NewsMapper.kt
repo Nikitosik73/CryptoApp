@@ -7,8 +7,9 @@ import com.example.cryptoapp.data.network.model.news.NewsInfoDto
 import com.example.cryptoapp.data.network.model.news.TitleNewsDto
 import com.example.cryptoapp.domain.entity.news.NewsInfo
 import com.example.cryptoapp.domain.entity.news.TitleNews
+import javax.inject.Inject
 
-class NewsMapper {
+class NewsMapper @Inject constructor() {
 
     fun mapDtoToDbModel(dto: NewsInfoDto) = NewsInfoDbModel(
         id = dto.id,
