@@ -8,15 +8,29 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.cryptoapp.R
 import com.example.cryptoapp.presentation.adapter.CoinPriceAdapter
 import com.example.cryptoapp.databinding.ActivityCoinPriceListBinding
+import com.example.cryptoapp.presentation.app.CoinApp
 import com.example.cryptoapp.presentation.viewmodel.CoinViewModel
+import com.example.cryptoapp.presentation.viewmodelfactory.ViewModelFactory
+import javax.inject.Inject
 
 class CoinPriceListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCoinPriceListBinding
-    private lateinit var viewModel: CoinViewModel
     private lateinit var priceAdapter: CoinPriceAdapter
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val viewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[CoinViewModel::class.java]
+    }
+
+    private val component by lazy {
+        (application as CoinApp).component
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        component.inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityCoinPriceListBinding.inflate(layoutInflater)
         val view = binding.root
@@ -31,8 +45,6 @@ class CoinPriceListActivity : AppCompatActivity() {
                 launchScreenFragment(it.fromSymbol)
             }
         }
-
-        viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
 
         viewModel.coinInfoList.observe(this) {
             Log.d("Test_of_load_data", it.toString())
