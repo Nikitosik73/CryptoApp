@@ -8,6 +8,7 @@ import com.example.cryptoapp.data.network.ApiFactory
 import com.example.cryptoapp.data.network.ApiService
 import com.example.cryptoapp.data.repository.CoinRepositoryImpl
 import com.example.cryptoapp.data.repository.NewsRepositoryImpl
+import com.example.cryptoapp.di.annotation.ApplicationScope
 import com.example.cryptoapp.domain.repository.CoinRepository
 import com.example.cryptoapp.domain.repository.NewsRepository
 import dagger.Binds
@@ -32,6 +33,7 @@ interface DataModule {
     companion object {
 
         @Provides
+        @ApplicationScope
         fun provideCoinDao(
             application: Application
         ): CoinInfoDao {
@@ -39,6 +41,7 @@ interface DataModule {
         }
 
         @Provides
+        @ApplicationScope
         fun provideNewsDao(
             application: Application
         ): NewsInfoDao {
@@ -46,6 +49,7 @@ interface DataModule {
         }
 
         @Provides
+        @ApplicationScope
         fun provideApiService(): ApiService {
             return ApiFactory.apiService
         }
