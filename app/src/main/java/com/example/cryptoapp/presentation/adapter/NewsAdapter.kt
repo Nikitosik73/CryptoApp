@@ -30,7 +30,7 @@ class NewsAdapter(val context: Context) : ListAdapter<NewsInfo, NewsViewHolder>(
         with(binding) {
             with(newsItem) {
                 val templateTitleNews = context.resources.getString(R.string.title_news)
-                tvNameNews.text = id.toString()
+                tvNameNews.text = titleNews
                 tvTitleNews.text = String.format(templateTitleNews, title)
                 Picasso.get().load(imageUrl).into(imageNews)
                 root.setOnClickListener {

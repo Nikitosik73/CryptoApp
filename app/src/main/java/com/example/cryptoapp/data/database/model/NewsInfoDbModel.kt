@@ -12,5 +12,5 @@ data class NewsInfoDbModel(
     val imageUrl: String,
     val title: String,
     val body: String,
-//    val titleNews: TitleNewsDbModel
-): Serializable
+    val nameNews: String
+)

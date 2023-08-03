@@ -8,5 +8,5 @@ data class NewsInfo(
     val imageUrl: String,
     val title: String,
     val body: String,
-//    val titleNews: TitleNews
+    val titleNews: String
 ): Serializable

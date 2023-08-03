@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.example.cryptoapp.databinding.FragmentCoinDetailBinding
 import com.example.cryptoapp.presentation.app.CoinApp
 import com.example.cryptoapp.presentation.viewmodel.CoinViewModel
@@ -24,9 +24,7 @@ class CoinDetailFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-    private val viewModel by lazy {
-        ViewModelProvider(this, viewModelFactory)[CoinViewModel::class.java]
-    }
+    private val viewModel: CoinViewModel by viewModels { viewModelFactory }
 
     private val component by lazy {
         (requireActivity().application as CoinApp).component

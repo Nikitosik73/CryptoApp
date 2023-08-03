@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.cryptoapp.data.database.model.CoinInfoDbModel
 import com.example.cryptoapp.data.database.model.NewsInfoDbModel
 
-@Database(entities = [CoinInfoDbModel::class, NewsInfoDbModel::class], version = 3, exportSchema = false)
+@Database(entities = [CoinInfoDbModel::class, NewsInfoDbModel::class], version = 4, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun coinInfoDao(): CoinInfoDao

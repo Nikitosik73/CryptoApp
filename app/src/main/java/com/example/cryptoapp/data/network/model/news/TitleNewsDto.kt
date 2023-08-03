@@ -6,4 +6,4 @@ import java.io.Serializable
 data class TitleNewsDto(
     @SerializedName("name")
     val name: String
-): Serializable
+)

@@ -1,12 +1,10 @@
 package com.example.cryptoapp.data.mapper
 
 import com.example.cryptoapp.data.database.model.NewsInfoDbModel
-import com.example.cryptoapp.data.database.model.TitleNewsDbModel
 import com.example.cryptoapp.data.network.model.news.NewsContainerDto
 import com.example.cryptoapp.data.network.model.news.NewsInfoDto
 import com.example.cryptoapp.data.network.model.news.TitleNewsDto
 import com.example.cryptoapp.domain.entity.news.NewsInfo
-import com.example.cryptoapp.domain.entity.news.TitleNews
 import javax.inject.Inject
 
 class NewsMapper @Inject constructor() {
@@ -17,8 +15,12 @@ class NewsMapper @Inject constructor() {
         imageUrl = dto.imageUrl,
         title = dto.title,
         body = dto.body,
-//        titleNews = TitleNewsDbModel(name = dto.titleNews.name)
+        nameNews = mapDtoTitleNewsToString(TitleNewsDto(dto.titleNews.name))
     )
+
+    private fun mapDtoTitleNewsToString(dto: TitleNewsDto): String {
+        return dto.name
+    }
 
     fun mapDbModelToEntity(dbModel: NewsInfoDbModel) = NewsInfo(
         id = dbModel.id,
@@ -26,7 +28,7 @@ class NewsMapper @Inject constructor() {
         imageUrl = dbModel.imageUrl,
         title = dbModel.title,
         body = dbModel.body,
-//        titleNews = TitleNews(name = dbModel.titleNews.name)
+        titleNews = dbModel.nameNews
     )
 
     fun mapNewsContainerToListNews(news: NewsContainerDto): List<NewsInfoDto> {

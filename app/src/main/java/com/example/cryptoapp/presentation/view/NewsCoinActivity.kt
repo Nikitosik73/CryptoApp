@@ -3,6 +3,7 @@ package com.example.cryptoapp.presentation.view
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.cryptoapp.databinding.ActivityNewsCoinBinding
@@ -20,9 +21,7 @@ class NewsCoinActivity : AppCompatActivity() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-    private val viewModel by lazy {
-        ViewModelProvider(this, viewModelFactory)[NewsViewModel::class.java]
-    }
+    private val viewModel by viewModels<NewsViewModel> { viewModelFactory }
 
     private val component by lazy {
         (application as CoinApp).component

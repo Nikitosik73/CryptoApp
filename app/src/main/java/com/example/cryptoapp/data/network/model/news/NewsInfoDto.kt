@@ -1,8 +1,6 @@
 package com.example.cryptoapp.data.network.model.news
 
-import com.example.cryptoapp.domain.entity.news.TitleNews
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
 
 data class NewsInfoDto(
     @SerializedName("id")
@@ -17,4 +15,4 @@ data class NewsInfoDto(
     val body: String,
     @SerializedName("source_info")
     val titleNews: TitleNewsDto
-): Serializable
+)

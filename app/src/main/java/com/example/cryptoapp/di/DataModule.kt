@@ -32,27 +32,27 @@ interface DataModule {
 
     companion object {
 
-        @Provides
-        @ApplicationScope
-        fun provideCoinDao(
-            application: Application
-        ): CoinInfoDao {
-            return AppDatabase.getInstance(application).coinInfoDao()
-        }
-
-        @Provides
-        @ApplicationScope
-        fun provideNewsDao(
-            application: Application
-        ): NewsInfoDao {
-            return AppDatabase.getInstance(application).newsInfoDao()
-        }
-
-        @Provides
-        @ApplicationScope
-        fun provideApiService(): ApiService {
-            return ApiFactory.apiService
-        }
+//        @Provides
+//        @ApplicationScope
+//        fun provideCoinDao(
+//            application: Application
+//        ): CoinInfoDao {
+//            return AppDatabase.getInstance(application).coinInfoDao()
+//        }
+//
+//        @Provides
+//        @ApplicationScope
+//        fun provideNewsDao(
+//            application: Application
+//        ): NewsInfoDao {
+//            return AppDatabase.getInstance(application).newsInfoDao()
+//        }
+//
+//        @Provides
+//        @ApplicationScope
+//        fun provideApiService(): ApiService {
+//            return ApiFactory.apiService
+//        }
 
         @Provides
         fun provideCoroutineScope(): CoroutineScope {

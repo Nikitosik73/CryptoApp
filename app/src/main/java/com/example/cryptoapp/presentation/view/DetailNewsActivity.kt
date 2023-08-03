@@ -30,10 +30,10 @@ class DetailNewsActivity : AppCompatActivity() {
 
         with(binding) {
             with(news) {
-                val templateString = resources.getString(R.string.title_news)
-                val templateBodyString = resources.getString(R.string.body_news)
+                val templateString = getTemplateString(R.string.title_news)
+                val templateBodyString = getTemplateString(R.string.body_news)
                 Picasso.get().load(imageUrl).into(imageViewNews)
-                textViewNameNews.text = id.toString()
+                textViewNameNews.text = titleNews
                 textViewTitle.text = String.format(templateString, title)
                 textViewBody.text = String.format(templateBodyString, body)
                 buttonNewsPage.setOnClickListener {
@@ -46,6 +46,8 @@ class DetailNewsActivity : AppCompatActivity() {
 
         }
     }
+
+    private fun getTemplateString(stringId: Int) = resources.getString(stringId)
 
     companion object {
 
